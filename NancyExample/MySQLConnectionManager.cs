@@ -12,7 +12,7 @@ namespace NancyExample
 
         private string host = "140.113.67.132";
         private string id = "AlanShih";
-        private string pwd = "fatshih0201";
+        private string pwd = "pwd";
         private string database = "testing";
         private string result = "";
 
