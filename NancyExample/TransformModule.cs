@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using Nancy;
+using System.Collections.Generic;
 
 namespace NancyExample
 {
@@ -25,25 +26,25 @@ namespace NancyExample
             {
                 string sqlString = @"Select * from transformtable;";
 
-                using (MySqlCommand command = new MySqlCommand(sqlString, MySQLConnectionManager.Instance.databaseConnection))
-                {
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                List<MyTransform> myTransformList = new List<MyTransform>();
+
+                lock (MySQLConnectionManager.Instance.databaseConnection)
+                    using (MySqlCommand command = new MySqlCommand(sqlString, MySQLConnectionManager.Instance.databaseConnection))
                     {
-                        if (reader.Read())
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            int id = reader.GetInt32(0);
-                            float positionX = reader.GetFloat(1);
-                            float positionY = reader.GetFloat(2);
-                            float positionZ = reader.GetFloat(3);
-                            // in this case the return format is json
-                            return new MyTransform(id, positionX, positionY, positionZ);
-                        }
-                        else
-                        {
-                            return null;
+                            while (reader.Read())
+                            {
+                                int id = reader.GetInt32(0);
+                                float positionX = reader.GetFloat(1);
+                                float positionY = reader.GetFloat(2);
+                                float positionZ = reader.GetFloat(3);
+                                // in this case the return format is json
+                                myTransformList.Add(new MyTransform(id, positionX, positionY, positionZ));
+                            }
+                            return myTransformList;
                         }
                     }
-                }
             };
 
         }
