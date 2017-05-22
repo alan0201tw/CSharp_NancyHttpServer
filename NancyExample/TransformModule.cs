@@ -35,7 +35,7 @@ namespace NancyExample
                             float positionX = reader.GetFloat(1);
                             float positionY = reader.GetFloat(2);
                             float positionZ = reader.GetFloat(3);
-
+                            // in this case the return format is json
                             return new MyTransform(id, positionX, positionY, positionZ);
                         }
                         else
