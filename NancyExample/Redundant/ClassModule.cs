@@ -25,6 +25,8 @@ namespace NancyExample
                 if (this.Request.Headers.Keys.Contains("TestingHeader"))
                     x = Request.Headers["TestingHeader"].First();
 
+                
+
                 return string.Format(" id = {0} , score = {1} ,testingHeader = {2} ", tmp.id, tmp.score , x);
             };
             
