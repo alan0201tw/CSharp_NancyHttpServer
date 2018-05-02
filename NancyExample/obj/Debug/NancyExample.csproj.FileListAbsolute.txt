@@ -42,3 +42,4 @@ C:\Users\AlanShih\Desktop\C#Projects\NancyPractice\NancyExample\NancyExample\obj
 C:\Users\AlanShih\Desktop\C#Projects\NancyPractice\NancyExample\NancyExample\obj\Debug\NancyExample.dll
 C:\Users\AlanShih\Desktop\C#Projects\NancyPractice\NancyExample\NancyExample\obj\Debug\NancyExample.pdb
 C:\Users\AlanShih\Desktop\C#Projects\NancyPractice\NancyExample\NancyExample\bin\MySql.Data.dll
+C:\Users\AlanShih\Desktop\C#Projects\NancyPractice\NancyExample\NancyExample\obj\Debug\NancyExample.csproj.CoreCompileInputs.cache

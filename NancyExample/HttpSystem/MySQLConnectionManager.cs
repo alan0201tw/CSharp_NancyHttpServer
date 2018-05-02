@@ -1,5 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Nancy;
+using System.IO;
+using System.Web;
 
 namespace NancyExample
 {
@@ -9,24 +11,25 @@ namespace NancyExample
         public static MySQLConnectionManager Instance { get; private set; }
 
         public MySqlConnection databaseConnection;
+        
+        private MySQLConfig configuration;
 
-        private string host = "140.113.67.132";
-        private string id = "AlanShih";
-        private string pwd = "pwd";
-        private string database = "testing";
-        private string result = "";
+        private string result;
 
         public MySQLConnectionManager()
         {
             if (Instance == null)
                 Instance = this;
 
-            Start();
+            if (MySQLConfig.Load(Path.Combine(HttpRuntime.AppDomainAppPath, "DatabaseConfig.xml"), out configuration))
+            {
+                Start(configuration);
+            }
         }
 
-        private void Start()
+        private void Start(MySQLConfig configuration)
         {
-            string connectionString = string.Format("Server = {0}; Database = {1}; UserID = {2}; Password = {3}; ", host, database, id, pwd);
+            string connectionString = string.Format("Server = {0}; Database = {1}; UserID = {2}; Password = {3}; ", configuration.DatabaseHostAddress, configuration.Database, configuration.DatabaseUsername, configuration.DatabasePassword);
             openSqlConnection(connectionString);
         }
 
